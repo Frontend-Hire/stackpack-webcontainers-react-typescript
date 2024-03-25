@@ -9,13 +9,13 @@ export default function App() {
             <Panel>
               <div className="border">Code Editor</div>
             </Panel>
-            <PanelResizeHandle />
+            <PanelResizeHandle className="h-2 bg-blue-300" />
             <Panel>
               <div className="border">Terminal</div>
             </Panel>
           </PanelGroup>
         </Panel>
-        <PanelResizeHandle />
+        <PanelResizeHandle className="w-2 bg-blue-300" />
         <Panel>
           <div className="border">Preview</div>
         </Panel>
