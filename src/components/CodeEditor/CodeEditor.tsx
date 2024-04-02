@@ -2,6 +2,7 @@ import React from 'react';
 import { Editor } from '@monaco-editor/react';
 import { VITE_REACT_TEMPLATE } from '../../templates/react-vite';
 import FileTabs from './FileTabs';
+import { getLanguageFromFileName } from './getLanguageFromFileName';
 
 export default function CodeEditor() {
   const [activeFile, setActiveFile] = React.useState(
@@ -9,6 +10,7 @@ export default function CodeEditor() {
   );
 
   const currentFile = VITE_REACT_TEMPLATE.files[activeFile];
+  const language = getLanguageFromFileName(activeFile);
 
   return (
     <div className="h-full">
@@ -21,6 +23,7 @@ export default function CodeEditor() {
         theme="vs-dark"
         path={activeFile}
         defaultValue={currentFile.contents}
+        defaultLanguage={language}
       />
     </div>
   );
