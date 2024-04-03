@@ -1,22 +1,21 @@
 import React from 'react';
 import { Editor } from '@monaco-editor/react';
-import { VITE_REACT_TEMPLATE } from '../../templates/react-vite';
 import FileTabs from './FileTabs';
 import { getLanguageFromFileName } from './getLanguageFromFileName';
 import { FileNode } from '@webcontainer/api';
+import { useWebContainer } from '../../providers/WebContainerProvider/useWebContainer';
 
 export default function CodeEditor() {
-  const [activeFile, setActiveFile] = React.useState(
-    () => VITE_REACT_TEMPLATE.entry,
-  );
+  const { template } = useWebContainer();
+  const [activeFile, setActiveFile] = React.useState(() => template.entry);
 
-  const currentFile = VITE_REACT_TEMPLATE.files[activeFile] as FileNode;
+  const currentFile = template.files[activeFile] as FileNode;
   const language = getLanguageFromFileName(activeFile);
 
   return (
     <div className="h-full">
       <FileTabs
-        files={VITE_REACT_TEMPLATE.visibleFiles}
+        files={template.visibleFiles}
         activeFile={activeFile}
         onFileChange={setActiveFile}
       />

@@ -1,16 +1,21 @@
 import React from 'react';
-import { FileSystemTree, WebContainer } from '@webcontainer/api';
+import { WebContainer } from '@webcontainer/api';
+import { Template } from '../../templates/react-vite';
 
-export const WebContainerContext = React.createContext<WebContainer | null>(
-  null,
-);
+export const WebContainerContext = React.createContext<{
+  webContainer: WebContainer | null;
+  template: Template;
+}>({
+  webContainer: null,
+  template: {} as Template,
+});
 
 type WebContainerProviderProps = {
-  files: FileSystemTree;
+  template: Template;
 };
 
 export default function WebContainerProvider({
-  files,
+  template,
   children,
 }: React.PropsWithChildren<WebContainerProviderProps>) {
   const [webContainer, setWebContainer] = React.useState<WebContainer | null>(
@@ -22,7 +27,7 @@ export default function WebContainerProvider({
     const initWebContainer = async () => {
       try {
         instance = await WebContainer.boot();
-        await instance.mount(files);
+        await instance.mount(template.files);
         setWebContainer(instance);
       } catch (e) {
         console.log(e);
@@ -38,10 +43,10 @@ export default function WebContainerProvider({
     //   instance?.teardown();
     //   setWebContainer(null);
     // };
-  }, [files]);
+  }, [template.files]);
 
   return (
-    <WebContainerContext.Provider value={webContainer}>
+    <WebContainerContext.Provider value={{ webContainer, template }}>
       {children}
     </WebContainerContext.Provider>
   );

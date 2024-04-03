@@ -1,6 +1,6 @@
 import { FileSystemTree } from '@webcontainer/api';
 
-type Template = {
+export type Template = {
   files: FileSystemTree;
   entry: string;
   visibleFiles: string[];

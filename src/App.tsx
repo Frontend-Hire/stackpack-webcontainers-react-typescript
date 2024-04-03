@@ -5,7 +5,7 @@ import { VITE_REACT_TEMPLATE } from './templates/react-vite';
 
 export default function App() {
   return (
-    <WebContainerProvider files={VITE_REACT_TEMPLATE.files}>
+    <WebContainerProvider template={VITE_REACT_TEMPLATE}>
       <div className="h-dvh p-2">
         <PanelGroup direction="horizontal">
           <Panel>
