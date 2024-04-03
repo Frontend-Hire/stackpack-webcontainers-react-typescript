@@ -22,6 +22,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
     "@webcontainer/api": "^1.1.9",
+    "@xterm/xterm": "^5.4.0",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
