@@ -1,6 +1,7 @@
 import React from 'react';
 import { Terminal as XTerminal } from '@xterm/xterm';
 import { FitAddon } from 'xterm-addon-fit';
+import useResizeObserver from 'use-resize-observer';
 import '@xterm/xterm/css/xterm.css';
 import { useWebContainer } from '../../providers/WebContainerProvider/useWebContainer';
 
@@ -8,10 +9,19 @@ export default function Terminal() {
   const { webContainer } = useWebContainer();
   const [terminal, setTerminal] = React.useState<XTerminal | null>(null);
   const terminalRef = React.useRef<HTMLDivElement>(null);
+  const fitAddonRef = React.useRef<FitAddon | null>(null);
+  const { ref } = useResizeObserver<HTMLDivElement>({
+    onResize: () => {
+      if (fitAddonRef.current) {
+        fitAddonRef.current.fit();
+      }
+    },
+  });
 
   React.useEffect(() => {
     const terminal = new XTerminal({ convertEol: true });
     const fitAddon = new FitAddon();
+    fitAddonRef.current = fitAddon;
 
     terminal.loadAddon(fitAddon);
     terminal.open(terminalRef.current!);
@@ -55,7 +65,7 @@ export default function Terminal() {
   }, [webContainer, terminal]);
 
   return (
-    <div className="h-full border bg-red-100">
+    <div className="h-full border bg-red-100" ref={ref}>
       <div className="h-full w-full" ref={terminalRef} />
     </div>
   );
