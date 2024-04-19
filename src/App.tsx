@@ -2,6 +2,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import CodeEditor from './components/CodeEditor';
 import WebContainerProvider from './providers/WebContainerProvider';
 import { VITE_REACT_TEMPLATE } from './templates/react-vite';
+import Terminal from './components/Terminal';
 
 export default function App() {
   return (
@@ -15,7 +16,7 @@ export default function App() {
               </Panel>
               <PanelResizeHandle className="h-2 bg-blue-300" />
               <Panel>
-                <div className="h-full border bg-red-100">Terminal</div>
+                <Terminal />
               </Panel>
             </PanelGroup>
           </Panel>
