@@ -3,6 +3,7 @@ import CodeEditor from './components/CodeEditor';
 import WebContainerProvider from './providers/WebContainerProvider';
 import { VITE_REACT_TEMPLATE } from './templates/react-vite';
 import Terminal from './components/Terminal';
+import Preview from './components/Preview';
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
           </Panel>
           <PanelResizeHandle className="w-2 bg-blue-300" />
           <Panel>
-            <div className="h-full border bg-red-100">Preview</div>
+            <Preview />
           </Panel>
         </PanelGroup>
       </div>
